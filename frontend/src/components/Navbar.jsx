@@ -34,9 +34,12 @@ const Navbar = () => {
               <>
                 <Link
                   to={"/profile"}
-                  className="btn btn-sm bg-black/60 text-white  gap-2 transition-colors"
                 >
-                  <User className="size-6" />
+                  <img
+                    src={authUser.profilePic || "/avatar.png"}
+                    alt="profile"
+                    className="size-10 rounded-full object-cover "
+                  />
                 </Link>
 
                 <button className="flex gap-2 items-center" onClick={logout}>
