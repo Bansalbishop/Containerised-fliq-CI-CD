@@ -6,13 +6,14 @@ import LoginPage from "./pages/LoginPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
 import { useAuthStore } from "./store/useAuthStore";
+import { useThemeStore } from "./store/useThemeStore";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 import { LayoutGroup } from "framer-motion";
 function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
-
+  const { theme } = useThemeStore();
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -25,7 +26,7 @@ function App() {
       </div>
     );
   return (
-    <div>
+    <div data-theme={theme}>
       <Navbar />
       <LayoutGroup>
         <Routes>
