@@ -1,0 +1,20 @@
+{
+  "name": "fliq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix && npm run start --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bansalbishop/fliq.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bansalbishop/fliq/issues"
+  },
+  "homepage": "https://github.com/Bansalbishop/fliq#readme"
+}
