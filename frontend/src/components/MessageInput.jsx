@@ -7,13 +7,14 @@ const MessageInput = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
   const { sendMessages, isSending } = useChatStore();
-
+  const inputRef = useRef(null);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file.type.startsWith("image/")) {
       toast.error("Select only image file");
       return;
     }
+
     const reader = new FileReader(file);
     reader.onloadend = () => {
       setImagePreview(reader.result);
@@ -37,6 +38,12 @@ const MessageInput = () => {
       if (fileInputRef.current) fileInputRef.current.value == "";
     } catch (error) {
       toast.error("Failed to send message", error);
+    }
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSendMessage(e);
     }
   };
 
@@ -69,10 +76,12 @@ const MessageInput = () => {
       <form onSubmit={handleSendMessage} className="flex items-center gap-2">
         <input
           type="text"
+          ref={inputRef}
           className="w-full input input-bordered rounded-lg input-sm sm:input-md"
           placeholder="Type a message..."
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <input
           type="file"
@@ -82,8 +91,14 @@ const MessageInput = () => {
           onChange={handleImageChange}
         />
         <button
+          type={imagePreview ? "submit" : "button"}
+          tabIndex={imagePreview ? -1 : 0}
+          onMouseDown={(e) => e.preventDefault()}
           className={`hidden sm:flex btn btn-circle ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
-          onClick={() => fileInputRef.current?.click()}
+          onClick={() => {
+            fileInputRef.current?.click();
+            inputRef.current?.focus();
+          }}
         >
           <Image size={20} />
         </button>
