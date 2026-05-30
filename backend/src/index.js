@@ -23,7 +23,6 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-
 server.listen(PORT, () => {
   console.log("server is running on port PORT " + PORT);
   connectDB();
